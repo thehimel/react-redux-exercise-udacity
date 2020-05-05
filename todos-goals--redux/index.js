@@ -36,7 +36,7 @@ function createStore (reducer) {
 
 
 // App Code
-// Reducer Function - A Pure Function
+// Reducer Function 1 - A Pure Function
 function todos (state = [], action) {
     switch (action.type) {
         case 'ADD_TODO' :
@@ -63,6 +63,29 @@ function todos (state = [], action) {
     }
 
     
+}
+
+// Reducer Function 2 - A Pure Function
+function goals (state = [], action) {
+    switch (action.type) {
+        case 'ADD_GOAL' :
+            return state.concat([action.goal]);
+
+        case 'REMOVE_GOAL':
+            return state.filter((goal) => goal.id !== action.id);
+
+        default:
+            // If no action.type is matched, return the given state as it is.
+            return state;
+    }
+}
+
+// Root Reducer
+function app (state = {}, action) {
+    return {
+        todos: todos(state.todos, action),
+        goals: goals(state.goals, action)
+    };
 }
 
 

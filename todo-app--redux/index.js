@@ -90,3 +90,13 @@ store.dispatch({
     }
 });
 
+store.dispatch({
+    type: 'TOGGLE_TODO',
+    id: 0
+});
+
+store.dispatch({
+    type: 'REMOVE_TODO',
+    id: 1
+});
+

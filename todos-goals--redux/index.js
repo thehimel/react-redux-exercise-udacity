@@ -1,13 +1,6 @@
-// Reducer Function - A Pure Function
-function todos (state = [], action) {
-    if (action.type === 'ADD_TODO') {
-        return state.concat([action.todo]);
-    }
 
-    return state;
-}
-
-function createStore () {
+// Library Code
+function createStore (reducer) {
     /*
     The Store should have 4 parts:
     1. The state
@@ -29,7 +22,7 @@ function createStore () {
     };
 
     const dispatch = (action) => {
-        state = todos(state, action);
+        state = reducer(state, action);
         listeners.forEach((listener) => listener());
     };
 
@@ -41,7 +34,20 @@ function createStore () {
     }
 }
 
-const store = createStore();
+
+// App Code
+// Reducer Function - A Pure Function
+function todos (state = [], action) {
+    if (action.type === 'ADD_TODO') {
+        return state.concat([action.todo]);
+    }
+
+    return state;
+}
+
+
+/* Use cases
+const store = createStore(todos);
 
 store.subscribe(() => {
     console.log('The new state is: ', store.getState());
@@ -52,3 +58,4 @@ const unsubscribe = store.subscribe(() => {
 });
 
 unsubscribe();
+*/

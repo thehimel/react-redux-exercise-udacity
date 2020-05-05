@@ -38,11 +38,31 @@ function createStore (reducer) {
 // App Code
 // Reducer Function - A Pure Function
 function todos (state = [], action) {
-    if (action.type === 'ADD_TODO') {
-        return state.concat([action.todo]);
+    switch (action.type) {
+        case 'ADD_TODO' :
+            // Return state concatinating the given todo obj.
+            return state.concat([action.todo]);
+
+        case 'REMOVE_TODO':
+            // Return the state except the todo matching the given id.
+            return state.filter((todo) => todo.id !== action.id);
+
+        case 'TOGGLE_TODO' :
+            /*
+            For every todo in state if todo.id is not equal to action.id, return the todo as it is.
+            lse, toggle the state of complete with Object.assign() where
+            1st arg is an empty obj, 2nd arg is the todo obj that merges in the empty obj
+            Except the change in the 3rd arg where we toggle the state of complete.
+            */
+            return state.map((todo) => todo.id !== action.id ? todo :
+                Object.assign({}, todo, { complete: !todo.complete }));
+
+        default:
+            // If no action.type is matched, return the given state as it is.
+            return state;
     }
 
-    return state;
+    
 }
 
 

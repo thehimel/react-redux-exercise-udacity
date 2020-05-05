@@ -46,16 +46,27 @@ function todos (state = [], action) {
 }
 
 
-/* Use cases
 const store = createStore(todos);
 
 store.subscribe(() => {
     console.log('The new state is: ', store.getState());
 });
 
-const unsubscribe = store.subscribe(() => {
-    console.log('The store is changed.');
+store.dispatch({
+    type: 'ADD_TODO',
+    todo: {
+        id: 0,
+        name: 'Learn Redux',
+        complete: false
+    }
 });
 
-unsubscribe();
-*/
+store.dispatch({
+    type: 'ADD_TODO',
+    todo: {
+        id: 1,
+        name: 'Read a book',
+        complete: true
+    }
+});
+

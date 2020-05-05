@@ -1,3 +1,12 @@
+// Reducer Function - A Pure Function
+function todos (state = [], action) {
+    if (action.type === 'ADD_TODO') {
+        return state.concat([action.todo]);
+    }
+
+    return state;
+}
+
 function createStore () {
     /*
     The Store should have 4 parts:

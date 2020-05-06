@@ -209,11 +209,9 @@ function addGoal () {
     }))
 }
 
-document.getElementById('todoBtn')
-.addEventListener('click', addTodo)
+document.getElementById('todoBtn').addEventListener('click', addTodo)
 
-document.getElementById('goalBtn')
-.addEventListener('click', addGoal)
+document.getElementById('goalBtn').addEventListener('click', addGoal)
 
 function addTodoToDOM (todo) {
     const node = document.createElement('li')
@@ -224,8 +222,7 @@ function addTodoToDOM (todo) {
         store.dispatch(toggleTodoAction(todo.id))
     })
 
-    document.getElementById('todos')
-        .appendChild(node)
+    document.getElementById('todos').appendChild(node)
 }
 
 function addGoalToDOM (goal) {
@@ -233,6 +230,5 @@ function addGoalToDOM (goal) {
     const text = document.createTextNode(goal.name)
     node.appendChild(text)
 
-    document.getElementById('goals')
-        .append(node)
+    document.getElementById('goals').appendChild(node)
 }

@@ -34,20 +34,25 @@ function createStore (reducer) {
     }
 }
 
-
 // App Code
+const ADD_TODO = 'ADD_TODO'
+const REMOVE_TODO = 'REMOVE_TODO'
+const TOGGLE_TODO = 'TOGGLE_TODO'
+const ADD_GOAL = 'ADD_GOAL'
+const REMOVE_GOAL = 'REMOVE_GOAL'
+
 // Reducer Function 1 - A Pure Function
 function todos (state = [], action) {
     switch (action.type) {
-        case 'ADD_TODO' :
+        case ADD_TODO:
             // Return state concatinating the given todo obj.
             return state.concat([action.todo]);
 
-        case 'REMOVE_TODO':
+        case REMOVE_TODO:
             // Return the state except the todo matching the given id.
             return state.filter((todo) => todo.id !== action.id);
 
-        case 'TOGGLE_TODO' :
+        case TOGGLE_TODO:
             /*
             For every todo in state if todo.id is not equal to action.id, return the todo as it is.
             lse, toggle the state of complete with Object.assign() where
@@ -68,14 +73,13 @@ function todos (state = [], action) {
 // Reducer Function 2 - A Pure Function
 function goals (state = [], action) {
     switch (action.type) {
-        case 'ADD_GOAL' :
+        case ADD_GOAL:
             return state.concat([action.goal]);
 
-        case 'REMOVE_GOAL':
+        case REMOVE_GOAL:
             return state.filter((goal) => goal.id !== action.id);
 
         default:
-            // If no action.type is matched, return the given state as it is.
             return state;
     }
 }
@@ -88,38 +92,68 @@ function app (state = {}, action) {
     };
 }
 
+const store = createStore(app);
 
-const store = createStore(todos);
-
+// Define the listener
 store.subscribe(() => {
     console.log('The new state is: ', store.getState());
 });
 
 store.dispatch({
-    type: 'ADD_TODO',
+    type: ADD_TODO,
     todo: {
-        id: 0,
-        name: 'Learn Redux',
-        complete: false
+      id: 0,
+      name: 'Walk the dog',
+      complete: false,
     }
-});
-
-store.dispatch({
-    type: 'ADD_TODO',
+  })
+  
+  store.dispatch({
+    type: ADD_TODO,
     todo: {
-        id: 1,
-        name: 'Read a book',
-        complete: true
+      id: 1,
+      name: 'Wash the car',
+      complete: false,
     }
-});
-
-store.dispatch({
-    type: 'TOGGLE_TODO',
-    id: 0
-});
-
-store.dispatch({
-    type: 'REMOVE_TODO',
+  })
+  
+  store.dispatch({
+    type: ADD_TODO,
+    todo: {
+      id: 2,
+      name: 'Go to the gym',
+      complete: true,
+    }
+  })
+  
+  store.dispatch({
+    type: REMOVE_TODO,
     id: 1
-});
+  })
+  
+  store.dispatch({
+    type: TOGGLE_TODO,
+    id: 0
+  })
+  
+  store.dispatch({
+    type: ADD_GOAL,
+    goal: {
+      id: 0,
+      name: 'Learn Redux'
+    }
+  })
+  
+  store.dispatch({
+    type: ADD_GOAL,
+    goal: {
+      id: 1,
+      name: 'Lose 20 pounds'
+    }
+  })
+  
+  store.dispatch({
+    type: REMOVE_GOAL,
+    id: 0
+  })
 
